@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis RTP Petani - RegenFarm Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0">
+        <div>
+            <div class="p-5 flex items-center space-x-3 border-b border-slate-800">
+                <!-- Container Logo Membulat (Tidak Lancip) -->
+                <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center p-1.5 overflow-hidden shrink-0 border border-slate-700/60 shadow-sm">
+                    <img src="logo.jpeg" alt="Logo" class="w-full h-full object-contain rounded-lg">
+                </div>
+                <div>
+                    <h1 class="text-white font-bold text-lg flex items-center gap-2">RegenFarm <span class="bg-emerald-500 text-slate-900 text-xs px-1.5 py-0.5 rounded">PRO</span></h1>
+                    <p class="text-xs text-slate-400">v3.0 - Full Enterprise</p>
+                </div>
+            </div>
+            <div class="p-3 text-xs text-slate-500">Sistem Pendukung Keputusan Ketahanan Pangan &amp; Regenerasi Petani</div>
+            
+            <nav class="mt-2 space-y-1 px-3">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-house"></i> Overview &amp; Data
+                </a>
+                <a href="rtp.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-emerald-950 text-emerald-400 font-medium border border-emerald-800/50">
+                    <i class="fa-solid fa-users"></i> Analisis RTP Petani
+                </a>
+                <a href="prioritas.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-chart-pie"></i> Matriks Prioritas
+                </a>
+                <a href="interverensi.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-hand-holding-heart"></i> Program Intervensi
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-slate-800 text-xs flex items-center gap-2 text-slate-400">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span> Basis Data 32 Provinsi Lolos Saring
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-y-auto">
+        <!-- Top Header -->
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center shrink-0">
+            <div>
+                <h2 class="text-xl font-bold text-slate-800">Data RTP Petani 32 Provinsi</h2>
+                <p class="text-xs text-slate-500">Analisis Rasio Pemuda vs Lansia di Sektor Agrikultur (Wilayah Memenuhi Syarat)</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="exportData('csv')" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50">
+                    <i class="fa-solid fa-file-arrow-down"></i> Ekspor CSV
+                </button>
+                <button onclick="exportData('json')" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50">
+                    <i class="fa-solid fa-code"></i> Ekspor JSON
+                </button>
+                <div class="bg-slate-100 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-600">
+                    <i class="fa-regular fa-clock"></i> <span id="live-clock">--:--:--</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <div class="p-8 space-y-6">
+            <!-- Chart Section -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-chart-column text-emerald-600"></i>
+                        <h3 class="font-bold text-slate-800">Perbandingan Rasio Tekanan Regenerasi Petani (RTP) - 32 Provinsi</h3>
+                    </div>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">DIY: 16.39</span>
+                </div>
+                <p class="text-xs text-slate-500 mb-6">Mengukur perbandingan perimbangan kelompok petani senior vs petani muda pada 32 provinsi terpilih. Provinsi non-agraris/perkotaan ekstrem dan pemekaran tertentu dieksklusi untuk menjaga validitas data.</p>
+                
+                <div class="h-80 w-full">
+                    <canvas id="rtpChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Bottom Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-xl border-l-4 border-red-500 border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-2 text-red-600 font-bold text-sm mb-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i> RTP Tertinggi Teranalisis
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        <strong>Kepulauan Riau (18.50) &amp; Kep. Bangka Belitung (16.20)</strong> mencatatkan tekanan tertinggi di antara provinsi terpilih akibat peralihan tenaga kerja muda ke sektor tambang dan maritim.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-5 rounded-xl border-l-4 border-amber-500 border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-2 text-amber-600 font-bold text-sm mb-2">
+                        <i class="fa-solid fa-scale-balanced"></i> Posisi DI Yogyakarta
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        <strong>DI Yogyakarta berada pada nilai 16.39</strong>, menunjukkan tingginya proporsi demografi petani usia senior dan mendesaknya program modernisasi pertanian berbasis teknologi bagi generasi muda.
+                    </p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl border-l-4 border-emerald-500 border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-2 text-emerald-600 font-bold text-sm mb-2">
+                        <i class="fa-solid fa-seedling"></i> Demografi Tani Stabil
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Wilayah seperti <strong>Papua Selatan (10.20) &amp; Sulawesi Selatan (10.40)</strong> mempertahankan rasio paling seimbang berkat basis agribisnis produktif dan minat petani muda yang terjaga.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const dataProvinsi = [
+            { kode: "11", provinsi: "Aceh", pulau: "Sumatera", rtp: 11.20, cagr: 0.85, ikrp: 42.1, kontribusi: 3.2, produksi: 1720, status: "Prioritas Sedang" },
+            { kode: "12", provinsi: "Sumatera Utara", pulau: "Sumatera", rtp: 12.50, cagr: 1.10, ikrp: 48.5, kontribusi: 4.8, produksi: 2580, status: "Prioritas Sedang" },
+            { kode: "13", provinsi: "Sumatera Barat", pulau: "Sumatera", rtp: 11.80, cagr: 0.45, ikrp: 45.2, kontribusi: 2.6, produksi: 1400, status: "Prioritas Sedang" },
+            { kode: "14", provinsi: "Riau", pulau: "Sumatera", rtp: 14.50, cagr: -1.20, ikrp: 62.4, kontribusi: 0.8, produksi: 430, status: "Prioritas Tinggi" },
+            { kode: "15", provinsi: "Jambi", pulau: "Sumatera", rtp: 13.20, cagr: -0.50, ikrp: 54.1, kontribusi: 1.1, produksi: 590, status: "Prioritas Tinggi" },
+            { kode: "16", provinsi: "Sumatera Selatan", pulau: "Sumatera", rtp: 10.80, cagr: 2.15, ikrp: 38.0, kontribusi: 5.1, produksi: 2740, status: "Sentra Utama Stabil" },
+            { kode: "17", provinsi: "Bengkulu", pulau: "Sumatera", rtp: 12.20, cagr: 0.10, ikrp: 49.0, kontribusi: 0.9, produksi: 480, status: "Prioritas Sedang" },
+            { kode: "18", provinsi: "Lampung", pulau: "Sumatera", rtp: 11.50, cagr: 1.80, ikrp: 39.5, kontribusi: 4.9, produksi: 2630, status: "Sentra Utama Stabil" },
+            { kode: "19", provinsi: "Kep. Bangka Belitung", pulau: "Sumatera", rtp: 16.20, cagr: -2.10, ikrp: 71.3, kontribusi: 0.2, produksi: 105, status: "Sangat Rentan" },
+            { kode: "21", provinsi: "Kepulauan Riau", pulau: "Sumatera", rtp: 18.50, cagr: -3.00, ikrp: 78.0, kontribusi: 0.05, produksi: 28, status: "Sangat Rentan" },
+            { kode: "32", provinsi: "Jawa Barat", pulau: "Jawa", rtp: 14.20, cagr: 0.90, ikrp: 52.3, kontribusi: 17.2, produksi: 9250, status: "Sentra Kritis" },
+            { kode: "33", provinsi: "Jawa Tengah", pulau: "Jawa", rtp: 13.80, cagr: 1.05, ikrp: 49.8, kontribusi: 17.8, produksi: 9570, status: "Sentra Kritis" },
+            { kode: "34", provinsi: "DI Yogyakarta", pulau: "Jawa", rtp: 16.39, cagr: -0.20, ikrp: 58.7, kontribusi: 1.0, produksi: 537, status: "Prioritas Tinggi" },
+            { kode: "35", provinsi: "Jawa Timur", pulau: "Jawa", rtp: 13.50, cagr: 1.20, ikrp: 47.6, kontribusi: 18.1, produksi: 9730, status: "Sentra Kritis" },
+            { kode: "36", provinsi: "Banten", pulau: "Jawa", rtp: 14.00, cagr: 0.30, ikrp: 55.1, kontribusi: 2.9, produksi: 1560, status: "Prioritas Tinggi" },
+            { kode: "51", provinsi: "Bali", pulau: "Nusa Tenggara", rtp: 14.80, cagr: -0.80, ikrp: 60.2, kontribusi: 1.2, produksi: 645, status: "Prioritas Tinggi" },
+            { kode: "52", provinsi: "Nusa Tenggara Barat", pulau: "Nusa Tenggara", rtp: 10.50, cagr: 2.40, ikrp: 36.4, kontribusi: 2.7, produksi: 1450, status: "Sentra Utama Stabil" },
+            { kode: "53", provinsi: "Nusa Tenggara Timur", pulau: "Nusa Tenggara", rtp: 12.80, cagr: -0.10, ikrp: 56.8, kontribusi: 1.4, produksi: 752, status: "Prioritas Tinggi" },
+            { kode: "61", provinsi: "Kalimantan Barat", pulau: "Kalimantan", rtp: 12.00, cagr: 0.60, ikrp: 46.5, kontribusi: 1.5, produksi: 805, status: "Prioritas Sedang" },
+            { kode: "62", provinsi: "Kalimantan Tengah", pulau: "Kalimantan", rtp: 11.80, cagr: 1.00, ikrp: 44.0, kontribusi: 1.1, produksi: 590, status: "Prioritas Sedang" },
+            { kode: "63", provinsi: "Kalimantan Selatan", pulau: "Kalimantan", rtp: 11.00, cagr: 1.50, ikrp: 40.2, kontribusi: 2.1, produksi: 1130, status: "Sentra Utama Stabil" },
+            { kode: "64", provinsi: "Kalimantan Timur", pulau: "Kalimantan", rtp: 13.60, cagr: -0.40, ikrp: 53.9, kontribusi: 0.6, produksi: 320, status: "Prioritas Tinggi" },
+            { kode: "65", provinsi: "Kalimantan Utara", pulau: "Kalimantan", rtp: 12.50, cagr: 0.20, ikrp: 50.1, kontribusi: 0.2, produksi: 108, status: "Prioritas Sedang" },
+            { kode: "71", provinsi: "Sulawesi Utara", pulau: "Sulawesi", rtp: 13.00, cagr: -0.30, ikrp: 52.0, kontribusi: 0.7, produksi: 375, status: "Prioritas Tinggi" },
+            { kode: "72", provinsi: "Sulawesi Tengah", pulau: "Sulawesi", rtp: 11.20, cagr: 1.80, ikrp: 41.0, kontribusi: 1.6, produksi: 860, status: "Sentra Utama Stabil" },
+            { kode: "73", provinsi: "Sulawesi Selatan", pulau: "Sulawesi", rtp: 10.40, cagr: 2.90, ikrp: 32.5, kontribusi: 9.3, produksi: 5000, status: "Sentra Utama Stabil" },
+            { kode: "74", provinsi: "Sulawesi Tenggara", pulau: "Sulawesi", rtp: 11.60, cagr: 0.90, ikrp: 43.8, kontribusi: 0.9, produksi: 484, status: "Prioritas Sedang" },
+            { kode: "75", provinsi: "Gorontalo", pulau: "Sulawesi", rtp: 11.40, cagr: 1.20, ikrp: 42.0, kontribusi: 0.5, produksi: 268, status: "Prioritas Sedang" },
+            { kode: "76", provinsi: "Sulawesi Barat", pulau: "Sulawesi", rtp: 12.10, cagr: 0.40, ikrp: 47.3, kontribusi: 0.6, produksi: 322, status: "Prioritas Sedang" },
+            { kode: "81", provinsi: "Maluku", pulau: "Maluku", rtp: 14.00, cagr: -1.00, ikrp: 61.0, kontribusi: 0.2, produksi: 107, status: "Sangat Rentan" },
+            { kode: "82", provinsi: "Maluku Utara", pulau: "Maluku", rtp: 14.50, cagr: -1.50, ikrp: 64.2, kontribusi: 0.1, produksi: 53, status: "Sangat Rentan" },
+            { kode: "93", provinsi: "Papua Selatan", pulau: "Papua", rtp: 10.20, cagr: 3.50, ikrp: 31.0, kontribusi: 0.5, produksi: 268, status: "Potensi Sentra Baru" }
+        ];
+
+        let rtpChartInstance = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLiveClock();
+            setInterval(updateLiveClock, 1000);
+            initRtpChart();
+        });
+
+        function updateLiveClock() {
+            const clockEl = document.getElementById('live-clock');
+            if (clockEl) {
+                const now = new Date();
+                clockEl.innerText = now.toLocaleTimeString('id-ID');
+            }
+        }
+
+        function initRtpChart() {
+            const canvas = document.getElementById('rtpChart');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const sortedData = [...dataProvinsi].sort((a, b) => b.rtp - a.rtp);
+
+            if (rtpChartInstance) {
+                rtpChartInstance.destroy();
+            }
+
+            rtpChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sortedData.map(d => d.provinsi),
+                    datasets: [{
+                        label: 'Skor RTP',
+                        data: sortedData.map(d => d.rtp),
+                        backgroundColor: sortedData.map(d => d.provinsi === "DI Yogyakarta" ? '#3b82f6' : (d.rtp >= 15.0 ? '#ef4444' : (d.rtp >= 12.0 ? '#f97316' : '#10b981'))),
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `RTP: ${context.parsed.y}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: 20,
+                            grid: { color: '#f1f5f9' },
+                            title: { display: true, text: 'Rasio RTP' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 9.5 }, maxRotation: 90, minRotation: 45 }
+                        }
+                    }
+                }
+            });
+        }
+
+        function exportData(format) {
+            if (format === 'json') {
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataProvinsi, null, 2));
+                const downloadAnchor = document.createElement('a');
+                downloadAnchor.setAttribute("href", dataStr);
+                downloadAnchor.setAttribute("download", "RegenFarm_Data_32_Provinsi.json");
+                document.body.appendChild(downloadAnchor);
+                downloadAnchor.click();
+                downloadAnchor.remove();
+            } else if (format === 'csv') {
+                let csvContent = "\uFEFFKode,Provinsi,Pulau,RTP,Produksi_RibuTon,CAGR,IKRP,Kontribusi_Persen,Status\n";
+                dataProvinsi.forEach(d => {
+                    csvContent += `"${d.kode}","${d.provinsi}","${d.pulau}",${d.rtp},${d.produksi},${d.cagr},${d.ikrp},${d.kontribusi},"${d.status}"\n`;
+                });
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.setAttribute("href", url);
+                link.setAttribute("download", "RegenFarm_Data_32_Provinsi.csv");
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            }
+        }
+    </script>
+</body>
+</html>

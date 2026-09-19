@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Intervensi - RegenFarm Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0">
+        <div>
+            <div class="p-5 flex items-center space-x-3 border-b border-slate-800">
+                <!-- Container Logo Membulat (Tidak Lancip) -->
+                <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center p-1.5 overflow-hidden shrink-0 border border-slate-700/60 shadow-sm">
+                    <img src="logo.jpeg" alt="Logo" class="w-full h-full object-contain rounded-lg">
+                </div>
+                <div>
+                    <h1 class="text-white font-bold text-lg flex items-center gap-2">RegenFarm <span class="bg-emerald-500 text-slate-900 text-xs px-1.5 py-0.5 rounded">PRO</span></h1>
+                    <p class="text-xs text-slate-400">v3.0 - Full Enterprise</p>
+                </div>
+            </div>
+            <div class="p-3 text-xs text-slate-500">Sistem Pendukung Keputusan Ketahanan Pangan &amp; Regenerasi Petani</div>
+            
+            <nav class="mt-2 space-y-1 px-3">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-house"></i> Overview &amp; Data
+                </a>
+                <a href="rtp.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-users"></i> Analisis RTP Petani
+                </a>
+                <a href="prioritas.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-chart-pie"></i> Matriks Prioritas
+                </a>
+                <a href="interverensi.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-emerald-950 text-emerald-400 font-medium border border-emerald-800/50">
+                    <i class="fa-solid fa-hand-holding-heart"></i> Program Intervensi
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-slate-800 text-xs flex items-center gap-2 text-slate-400">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span> Basis Data 38 Provinsi Aktif
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-y-auto">
+        <!-- Top Header -->
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center shrink-0">
+            <div>
+                <h2 class="text-xl font-bold text-slate-800">Program Intervensi Strategis</h2>
+                <p class="text-xs text-slate-500">Rekomendasi Kebijakan Spesifik Berbasis Status Wilayah</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="exportCSV()" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50 transition">
+                    <i class="fa-solid fa-file-arrow-down"></i> Ekspor CSV
+                </button>
+                <button onclick="exportJSON()" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50 transition">
+                    <i class="fa-solid fa-code"></i> Ekspor JSON
+                </button>
+                <div class="bg-slate-100 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-600 flex items-center gap-2">
+                    <i class="fa-regular fa-clock"></i> <span id="live-clock">--:--:--</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <div class="p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Card 1: Prioritas I -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-red-500 text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
+                        Prioritas I — Sentra Kritis (Pulau Jawa)
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Proteksi Lahan &amp; Subsidized Agropreneur</h3>
+                            <p class="text-xs text-slate-500 mb-4">Jawa Barat, Jawa Tengah, Jawa Timur, Banten, Yogyakarta.</p>
+                            
+                            <ul class="space-y-2.5 text-xs text-slate-700">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Moratorium penuh alih fungsi lahan LP2B dan insentif pajak PBB gratis untuk lahan produktif.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Skema pembiayaan digital (KUR Agropreneur) tanpa agunan bagi milenial yang mempertahankan lahan.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Modernisasi alsintan presisi (drone pemupukan &amp; rotavator otomatis).</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Prioritas II -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-purple-600 text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
+                        Prioritas II — Kepulauan &amp; Daerah Rentan
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Diversifikasi Local Food &amp; Smart Logistics</h3>
+                            <p class="text-xs text-slate-500 mb-4">Kep. Babel, Kep. Riau, Maluku, Maluku Utara, Papua Pegunungan.</p>
+                            
+                            <ul class="space-y-2.5 text-xs text-slate-700">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Optimalisasi pangan lokal non-beras (Sagu, Ubi Kayu, dan Jagung).</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Pengembangan urban farming, hydroponics, dan jaringan cold-chain logistics terintegrasi.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Asuransi pertanian berbasis indeks parameter iklim lokal.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Prioritas III -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-emerald-600 text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
+                        Prioritas III — Sentra Potensial &amp; Stabil
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Korporatisasi Petani &amp; Export Off-taker</h3>
+                            <p class="text-xs text-slate-500 mb-4">Sulawesi Selatan, Lampung, Sumsel, NTB, Papua Selatan.</p>
+                            
+                            <ul class="space-y-2.5 text-xs text-slate-700">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Pembentukan konsorsium bisnis korporasi petani berbasis koperasi modern.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Akselerasi keterbukaan pasar ekspor dan jaringan off-taker nasional.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Penguatan Early Warning System berbasis IoT untuk mendeteksi penurunan RTP secara real-time.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Script Fungsionalitas Interaktif -->
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('live-clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        const programData = [
+            {
+                prioritas: "Prioritas I — Sentra Kritis (Pulau Jawa)",
+                program: "Proteksi Lahan & Subsidized Agropreneur",
+                wilayah: "Jawa Barat, Jawa Tengah, Jawa Timur, Banten, Yogyakarta",
+                intervensi: [
+                    "Moratorium penuh alih fungsi lahan LP2B dan insentif pajak PBB gratis untuk lahan produktif.",
+                    "Skema pembiayaan digital (KUR Agropreneur) tanpa agunan bagi milenial yang mempertahankan lahan.",
+                    "Modernisasi alsintan presisi (drone pemupukan & rotavator otomatis)."
+                ]
+            },
+            {
+                prioritas: "Prioritas II — Kepulauan & Daerah Rentan",
+                program: "Diversifikasi Local Food & Smart Logistics",
+                wilayah: "Kep. Babel, Kep. Riau, Maluku, Maluku Utara, Papua Pegunungan",
+                intervensi: [
+                    "Optimalisasi pangan lokal non-beras (Sagu, Ubi Kayu, dan Jagung).",
+                    "Pengembangan urban farming, hydroponics, dan jaringan cold-chain logistics terintegrasi.",
+                    "Asuransi pertanian berbasis indeks parameter iklim lokal."
+                ]
+            },
+            {
+                prioritas: "Prioritas III — Sentra Potensial & Stabil",
+                program: "Korporatisasi Petani & Export Off-taker",
+                wilayah: "Sulawesi Selatan, Lampung, Sumsel, NTB, Papua Selatan",
+                intervensi: [
+                    "Pembentukan konsorsium bisnis korporasi petani berbasis koperasi modern.",
+                    "Akselerasi keterbukaan pasar ekspor dan jaringan off-taker nasional.",
+                    "Penguatan Early Warning System berbasis IoT untuk mendeteksi penurunan RTP secara real-time."
+                ]
+            }
+        ];
+
+        function exportJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(programData, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "program_intervensi_regenfarm.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function exportCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,Prioritas,Nama Program,Cakupan Wilayah,Detail Intervensi\n";
+            programData.forEach(item => {
+                const details = `"${item.intervensi.join('; ')}"`;
+                csvContent += `"${item.prioritas}","${item.program}","${item.wilayah}",${details}\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", encodedUri);
+            downloadAnchor.setAttribute("download", "program_intervensi_regenfarm.csv");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+    </script>
+</body>
+</html>
