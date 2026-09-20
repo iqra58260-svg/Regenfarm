@@ -54,10 +54,10 @@
                 <p class="text-xs text-slate-500">Pemetaan Kuadran Berdasarkan Kontribusi Produksi &amp; Kerentanan IKRP (32 Provinsi)</p>
             </div>
             <div class="flex items-center gap-3">
-                <button onclick="exportData('csv')" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50">
+                <button onclick="exportData('csv')" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50 transition">
                     <i class="fa-solid fa-file-arrow-down"></i> Ekspor CSV
                 </button>
-                <button onclick="exportData('json')" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50">
+                <button onclick="exportData('json')" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50 transition">
                     <i class="fa-solid fa-code"></i> Ekspor JSON
                 </button>
                 <div class="bg-slate-100 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-600">
@@ -93,19 +93,19 @@
                 </div>
             </div>
 
-            <!-- Quadrant Summary Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <!-- Quadrant Summary Cards (Diperbarui dengan Efek Timbul & Bayangan Smooth) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-xl border-l-4 border-red-500 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
                     <h4 class="text-xs font-bold text-red-600 uppercase tracking-wider mb-2"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Sentra Kritis</h4>
-                    <p class="text-xs text-slate-600">Jawa Barat, Jawa Tengah, Jawa Timur. Kontribusi produksi sangat tinggi (&gt;17%), namun tekanan RTP dan kerentanan meningkat pesat.</p>
+                    <p class="text-xs text-slate-600 leading-relaxed">Jawa Barat, Jawa Tengah, Jawa Timur. Kontribusi produksi sangat tinggi (&gt;17%), namun tekanan RTP dan kerentanan meningkat pesat.</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="bg-white p-5 rounded-xl border-l-4 border-amber-500 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
                     <h4 class="text-xs font-bold text-amber-600 uppercase tracking-wider mb-2"><i class="fa-solid fa-circle-exclamation mr-1"></i> Prioritas Tinggi &amp; Rentan</h4>
-                    <p class="text-xs text-slate-600">DIY, Banten, Kep. Riau, Babel, Maluku, Maluku Utara. Membutuhkan intervensi langsung regenerasi petani dan modernisasi alat.</p>
+                    <p class="text-xs text-slate-600 leading-relaxed">DIY, Banten, Kep. Riau, Babel, Maluku, Maluku Utara. Membutuhkan intervensi langsung regenerasi petani dan modernisasi alat.</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="bg-white p-5 rounded-xl border-l-4 border-emerald-500 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
                     <h4 class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2"><i class="fa-solid fa-circle-check mr-1"></i> Sentra Utama &amp; Baru</h4>
-                    <p class="text-xs text-slate-600">Sulsel, Sumsel, NTB, Lampung, Papua Selatan. Menjadi pilar penopang ketahanan pangan nasional dengan demografi tergolong sehat.</p>
+                    <p class="text-xs text-slate-600 leading-relaxed">Sulsel, Sumsel, NTB, Lampung, Papua Selatan. Menjadi pilar penopang ketahanan pangan nasional dengan demografi tergolong sehat.</p>
                 </div>
             </div>
         </div>
