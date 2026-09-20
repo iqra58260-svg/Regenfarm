@@ -13,7 +13,7 @@
     <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0">
         <div>
             <div class="p-5 flex items-center space-x-3 border-b border-slate-800">
-                <!-- Container Logo Membulat (Tidak Lancip) -->
+                <!-- Container Logo Membulat -->
                 <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center p-1.5 overflow-hidden shrink-0 border border-slate-700/60 shadow-sm">
                     <img src="logo.jpeg" alt="Logo" class="w-full h-full object-contain rounded-lg">
                 </div>
@@ -70,14 +70,14 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 <!-- Card 1: Prioritas I -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
                     <div class="bg-red-500 text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
                         Prioritas I — Sentra Kritis (Pulau Jawa)
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                         <div>
                             <h3 class="font-bold text-slate-900 text-base mb-1">Proteksi Lahan &amp; Subsidized Agropreneur</h3>
-                            <p class="text-xs text-slate-500 mb-4">Jawa Barat, Jawa Tengah, Jawa Timur, Banten, Yogyakarta.</p>
+                            <p class="text-xs text-slate-500 mb-4">Jawa Barat, Jawa Tengah, Jawa Timur, Banten, DI Yogyakarta.</p>
                             
                             <ul class="space-y-2.5 text-xs text-slate-700">
                                 <li class="flex items-start gap-2">
@@ -98,7 +98,7 @@
                 </div>
 
                 <!-- Card 2: Prioritas II -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
                     <div class="bg-purple-600 text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
                         Prioritas II — Kepulauan &amp; Daerah Rentan
                     </div>
@@ -126,7 +126,7 @@
                 </div>
 
                 <!-- Card 3: Prioritas III -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
                     <div class="bg-emerald-600 text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
                         Prioritas III — Sentra Potensial &amp; Stabil
                     </div>
@@ -157,7 +157,7 @@
         </div>
     </main>
 
-    <!-- Script Fungsionalitas Interaktif -->
+    <!-- Script Interaktif & Ekspor Data -->
     <script>
         function updateClock() {
             const now = new Date();
@@ -173,7 +173,7 @@
             {
                 prioritas: "Prioritas I — Sentra Kritis (Pulau Jawa)",
                 program: "Proteksi Lahan & Subsidized Agropreneur",
-                wilayah: "Jawa Barat, Jawa Tengah, Jawa Timur, Banten, Yogyakarta",
+                wilayah: "Jawa Barat, Jawa Tengah, Jawa Timur, Banten, DI Yogyakarta",
                 intervensi: [
                     "Moratorium penuh alih fungsi lahan LP2B dan insentif pajak PBB gratis untuk lahan produktif.",
                     "Skema pembiayaan digital (KUR Agropreneur) tanpa agunan bagi milenial yang mempertahankan lahan.",
@@ -213,18 +213,19 @@
         }
 
         function exportCSV() {
-            let csvContent = "data:text/csv;charset=utf-8,Prioritas,Nama Program,Cakupan Wilayah,Detail Intervensi\n";
+            let csvContent = "\uFEFFPrioritas,Nama Program,Cakupan Wilayah,Detail Intervensi\n";
             programData.forEach(item => {
                 const details = `"${item.intervensi.join('; ')}"`;
                 csvContent += `"${item.prioritas}","${item.program}","${item.wilayah}",${details}\n`;
             });
-            const encodedUri = encodeURI(csvContent);
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", encodedUri);
-            downloadAnchor.setAttribute("download", "program_intervensi_regenfarm.csv");
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", "program_intervensi_regenfarm.csv");
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
         }
     </script>
 </body>
