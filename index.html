@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overview & Data - RegenFarm Pro</title>
+    <title>RegenFarm</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
 
-                <!-- Kartu 4: Wilayah Prioritas I -->
+                <!-- Kartu 4: Wilayah Prioritas I (Disesuaikan Presisi Menjadi 7 Provinsi Sesuai File SEC) -->
                 <div class="group relative bg-gradient-to-br from-red-50/80 via-white to-red-50/30 p-5 rounded-2xl border border-red-200/60 shadow-sm hover:shadow-xl hover:shadow-red-500/10 hover:border-red-400 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer overflow-hidden">
                     <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-red-500/5 rounded-full blur-xl group-hover:bg-red-500/15 transition-all"></div>
                     <div class="flex items-center justify-between mb-3">
@@ -119,7 +119,7 @@
                             <i class="fa-solid fa-fire"></i>
                         </div>
                     </div>
-                    <div class="text-3xl font-black text-red-600 tracking-tight mb-1">9 <span class="text-lg font-bold text-red-600">Provinsi</span></div>
+                    <div class="text-3xl font-black text-red-600 tracking-tight mb-1">7 <span class="text-lg font-bold text-red-600">Provinsi</span></div>
                     <div class="flex items-center gap-1.5 text-[11px] font-medium text-red-700 bg-red-100/60 px-2.5 py-1 rounded-lg w-fit mt-3">
                         <i class="fa-solid fa-bolt text-[10px]"></i> Kerentanan &amp; Kontribusi Tinggi
                     </div>
@@ -276,29 +276,29 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Data 38 Provinsi dengan Petani Muda & Senior yang Disesuaikan dari Tabel BPS
+        // Data 38 Provinsi Disesuaikan Persis Sesuai Tabel Resmi SEC Satria Data 2026
         const provincesData = [
             { name: "DI Yogyakarta", island: "Jawa", rtp: 16.39, senior: "240,339", young: "14,660", avgAge: "55.8 Thn", ikrp: 0.51, contrib: "1.00%", commodity: "Padi & Hortikultura", category: "Prioritas II" },
             { name: "Jawa Tengah", island: "Jawa", rtp: 8.00, senior: "2,091,634", young: "261,352", avgAge: "51.1 Thn", ikrp: 0.38, contrib: "16.99%", commodity: "Padi & Jagung", category: "Prioritas I" },
             { name: "Jawa Barat", island: "Jawa", rtp: 5.58, senior: "1,508,044", young: "270,276", avgAge: "51.5 Thn", ikrp: 0.31, contrib: "17.09%", commodity: "Padi & Teh", category: "Prioritas I" },
             { name: "Jawa Timur", island: "Jawa", rtp: 5.57, senior: "2,568,515", young: "460,769", avgAge: "50.5 Thn", ikrp: 0.35, contrib: "18.16%", commodity: "Padi & Tebu", category: "Prioritas I" },
-            { name: "Bali", island: "Bali & Nusa Tenggara", rtp: 5.20, senior: "152,777", young: "29,386", avgAge: "44.8 Thn", ikrp: 0.30, contrib: "1.26%", commodity: "Padi & Hortikultura", category: "Prioritas I" },
+            { name: "Bali", island: "Bali & Nusa Tenggara", rtp: 5.20, senior: "152,777", young: "29,386", avgAge: "44.8 Thn", ikrp: 0.30, contrib: "1.26%", commodity: "Padi & Hortikultura", category: "Pemantauan Berkala" },
             { name: "DKI Jakarta", island: "Jawa", rtp: 5.08, senior: "5,381", young: "1,059", avgAge: "58.2 Thn", ikrp: 0.25, contrib: "0.00%", commodity: "Hortikultura Urban", category: "Eksklusi / Audit Data" },
             { name: "Banten", island: "Jawa", rtp: 5.01, senior: "248,532", young: "49,586", avgAge: "50.8 Thn", ikrp: 0.28, contrib: "3.15%", commodity: "Padi & Emping", category: "Prioritas I" },
             { name: "Sulawesi Utara", island: "Sulawesi", rtp: 4.79, senior: "111,721", young: "23,331", avgAge: "45.9 Thn", ikrp: 0.27, contrib: "0.45%", commodity: "Kelapa & Cengkeh", category: "Pemantauan Berkala" },
             { name: "Sumatera Barat", island: "Sumatera", rtp: 4.38, senior: "291,612", young: "66,538", avgAge: "46.5 Thn", ikrp: 0.29, contrib: "2.77%", commodity: "Padi & Kelapa Sawit", category: "Pemantauan Berkala" },
             { name: "Kalimantan Timur", island: "Kalimantan", rtp: 3.43, senior: "71,696", young: "20,923", avgAge: "45.1 Thn", ikrp: 0.24, contrib: "0.40%", commodity: "Kelapa Sawit", category: "Pemantauan Berkala" },
             { name: "Sulawesi Selatan", island: "Sulawesi", rtp: 3.41, senior: "370,736", young: "108,673", avgAge: "44.2 Thn", ikrp: 0.21, contrib: "9.12%", commodity: "Padi & Jagung", category: "Sentra Strategis" },
-            { name: "Kepulauan Riau", island: "Sumatera", rtp: 3.37, senior: "25,565", young: "7,576", avgAge: "56.4 Thn", ikrp: 0.42, contrib: "0.00%", commodity: "Sayuran & Buah", category: "Prioritas II" },
-            { name: "Sumatera Utara", island: "Sumatera", rtp: 3.10, senior: "540,385", young: "174,102", avgAge: "51.8 Thn", ikrp: 0.26, contrib: "3.90%", commodity: "Kelapa Sawit & Karet", category: "Sentra Strategis" },
-            { name: "Kalimantan Selatan", island: "Kalimantan", rtp: 3.02, senior: "158,902", young: "52,564", avgAge: "45.6 Thn", ikrp: 0.28, contrib: "1.64%", commodity: "Padi & Karet", category: "Prioritas I" },
+            { name: "Kepulauan Riau", island: "Sumatera", rtp: 3.37, senior: "25,565", young: "7,576", avgAge: "56.4 Thn", ikrp: 0.42, contrib: "0.00%", commodity: "Sayuran & Buah", category: "Pemantauan Berkala" },
+            { name: "Sumatera Utara", island: "Sumatera", rtp: 3.10, senior: "540,385", young: "174,102", avgAge: "51.8 Thn", ikrp: 0.26, contrib: "3.90%", commodity: "Kelapa Sawit & Karet", category: "Pemantauan Berkala" },
+            { name: "Kalimantan Selatan", island: "Kalimantan", rtp: 3.02, senior: "158,902", young: "52,564", avgAge: "45.6 Thn", ikrp: 0.28, contrib: "1.64%", commodity: "Padi & Karet", category: "Pemantauan Berkala" },
             { name: "Lampung", island: "Sumatera", rtp: 3.01, senior: "469,881", young: "156,130", avgAge: "46.2 Thn", ikrp: 0.19, contrib: "5.16%", commodity: "Kopi & Singkong", category: "Sentra Strategis" },
             { name: "Nusa Tenggara Timur", island: "Bali & Nusa Tenggara", rtp: 3.00, senior: "327,628", young: "109,067", avgAge: "48.2 Thn", ikrp: 0.33, contrib: "1.43%", commodity: "Jagung & Sapi", category: "Prioritas I" },
             { name: "Sulawesi Tenggara", island: "Sulawesi", rtp: 2.76, senior: "107,360", young: "38,890", avgAge: "47.6 Thn", ikrp: 0.25, contrib: "0.90%", commodity: "Jambu Mente & Kakao", category: "Pemantauan Berkala" },
             { name: "Aceh", island: "Sumatera", rtp: 2.65, senior: "262,894", young: "99,346", avgAge: "52.8 Thn", ikrp: 0.32, contrib: "2.63%", commodity: "Padi & Kopi", category: "Prioritas I" },
             { name: "Riau", island: "Sumatera", rtp: 2.60, senior: "222,057", young: "85,566", avgAge: "49.0 Thn", ikrp: 0.23, contrib: "0.39%", commodity: "Kelapa Sawit", category: "Pemantauan Berkala" },
             { name: "Maluku Utara", island: "Maluku & Papua", rtp: 2.55, senior: "45,554", young: "17,897", avgAge: "52.1 Thn", ikrp: 0.29, contrib: "0.05%", commodity: "Kelapa & Cengkeh", category: "Pemantauan Berkala" },
-            { name: "Maluku", island: "Maluku & Papua", rtp: 2.53, senior: "66,489", young: "26,243", avgAge: "52.5 Thn", ikrp: 0.36, contrib: "0.15%", commodity: "Cengkeh & Pala", category: "Prioritas II" },
+            { name: "Maluku", island: "Maluku & Papua", rtp: 2.53, senior: "66,489", young: "26,243", avgAge: "52.5 Thn", ikrp: 0.36, contrib: "0.15%", commodity: "Cengkeh & Pala", category: "Pemantauan Berkala" },
             { name: "Sulawesi Tengah", island: "Sulawesi", rtp: 2.43, senior: "136,493", young: "56,203", avgAge: "45.4 Thn", ikrp: 0.24, contrib: "1.54%", commodity: "Kakao & Padi", category: "Pemantauan Berkala" },
             { name: "Jambi", island: "Sumatera", rtp: 2.36, senior: "166,923", young: "70,857", avgAge: "47.9 Thn", ikrp: 0.22, contrib: "0.52%", commodity: "Karet & Sawit", category: "Pemantauan Berkala" },
             { name: "Kalimantan Tengah", island: "Kalimantan", rtp: 2.33, senior: "92,285", young: "39,670", avgAge: "46.8 Thn", ikrp: 0.21, contrib: "0.62%", commodity: "Kelapa Sawit", category: "Pemantauan Berkala" },
@@ -308,11 +308,11 @@
             { name: "Kalimantan Barat", island: "Kalimantan", rtp: 2.20, senior: "210,673", young: "95,686", avgAge: "47.3 Thn", ikrp: 0.22, contrib: "1.31%", commodity: "Kelapa Sawit & Karet", category: "Pemantauan Berkala" },
             { name: "Kepulauan Bangka Belitung", island: "Sumatera", rtp: 2.17, senior: "46,261", young: "21,271", avgAge: "49.3 Thn", ikrp: 0.19, contrib: "0.12%", commodity: "Lada & Sawit", category: "Pemantauan Berkala" },
             { name: "Gorontalo", island: "Sulawesi", rtp: 2.10, senior: "43,376", young: "20,698", avgAge: "48.7 Thn", ikrp: 0.20, contrib: "0.47%", commodity: "Jagung", category: "Pemantauan Berkala" },
-            { name: "Sumatera Selatan", island: "Sumatera", rtp: 2.07, senior: "354,778", young: "171,265", avgAge: "50.2 Thn", ikrp: 0.18, contrib: "5.30%", commodity: "Karet & Kelapa Sawit", category: "Sentra Strategis" },
+            { name: "Sumatera Selatan", island: "Sumatera", rtp: 2.07, senior: "354,778", young: "171,265", avgAge: "50.2 Thn", ikrp: 0.18, contrib: "5.30%", commodity: "Karet & Kelapa Sawit", category: "Pemantauan Berkala" },
             { name: "Nusa Tenggara Barat", island: "Bali & Nusa Tenggara", rtp: 1.80, senior: "225,415", young: "125,051", avgAge: "49.6 Thn", ikrp: 0.25, contrib: "2.88%", commodity: "Padi & Jagung", category: "Prioritas I" },
             { name: "Papua Pegunungan", island: "Maluku & Papua", rtp: 1.62, senior: "37,551", young: "54,561", avgAge: "55.1 Thn", ikrp: 0.31, contrib: "0.00%", commodity: "Ubi Jalar & Jagung", category: "Eksklusi / Pemekaran" },
             { name: "Papua Barat Daya", island: "Maluku & Papua", rtp: 1.58, senior: "9,651", young: "5,134", avgAge: "54.6 Thn", ikrp: 0.35, contrib: "0.00%", commodity: "Kelapa Sawit & Sagu", category: "Eksklusi / Pemekaran" },
-            { name: "Papua", island: "Maluku & Papua", rtp: 1.55, senior: "22,234", young: "11,555", avgAge: "54.2 Thn", ikrp: 0.39, contrib: "0.01%", commodity: "Sagu & Padi", category: "Prioritas II" },
+            { name: "Papua", island: "Maluku & Papua", rtp: 1.55, senior: "22,234", young: "11,555", avgAge: "54.2 Thn", ikrp: 0.39, contrib: "0.01%", commodity: "Sagu & Padi", category: "Pemantauan Berkala" },
             { name: "Papua Tengah", island: "Maluku & Papua", rtp: 1.52, senior: "32,145", young: "52,891", avgAge: "53.9 Thn", ikrp: 0.28, contrib: "0.00%", commodity: "Ubi Kayu & Kopi", category: "Eksklusi / Pemekaran" },
             { name: "Papua Barat", island: "Maluku & Papua", rtp: 1.49, senior: "11,585", young: "10,776", avgAge: "53.5 Thn", ikrp: 0.22, contrib: "0.04%", commodity: "Pala & Kelapa Sawit", category: "Pemantauan Berkala" },
             { name: "Papua Selatan", island: "Maluku & Papua", rtp: 1.47, senior: "13,804", young: "16,628", avgAge: "53.1 Thn", ikrp: 0.18, contrib: "0.00%", commodity: "Padi Sawah", category: "Eksklusi / Pemekaran" }
