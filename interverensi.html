@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program Intervensi - RegenFarm Pro</title>
+    <title>RegenFarm</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -50,7 +50,7 @@
         <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center shrink-0">
             <div>
                 <h2 class="text-xl font-bold text-slate-800">Program Intervensi Strategis</h2>
-                <p class="text-xs text-slate-500">Rekomendasi Kebijakan Spesifik Berbasis Status Wilayah</p>
+                <p class="text-xs text-slate-500">Rekomendasi Kebijakan Spesifik Berbasis 4 Kategori Kuadran Wilayah</p>
             </div>
             <div class="flex items-center gap-3">
                 <button onclick="exportCSV()" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50 transition">
@@ -67,17 +67,17 @@
 
         <!-- Content Body -->
         <div class="p-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 <!-- Card 1: Prioritas I -->
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
-                    <div class="bg-red-500 text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
-                        Prioritas I — Sentra Kritis (Pulau Jawa)
+                    <div class="bg-[#ef4444] text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
+                        Prioritas I — Kerentanan &amp; Kontribusi Tinggi
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                         <div>
                             <h3 class="font-bold text-slate-900 text-base mb-1">Proteksi Lahan &amp; Subsidized Agropreneur</h3>
-                            <p class="text-xs text-slate-500 mb-4">Jawa Barat, Jawa Tengah, Jawa Timur, Banten, DI Yogyakarta.</p>
+                            <p class="text-xs text-slate-500 mb-4">Jawa Tengah, Jawa Timur, Jawa Barat, Aceh, Banten, NTB, NTT.</p>
                             
                             <ul class="space-y-2.5 text-xs text-slate-700">
                                 <li class="flex items-start gap-2">
@@ -99,13 +99,13 @@
 
                 <!-- Card 2: Prioritas II -->
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
-                    <div class="bg-purple-600 text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
-                        Prioritas II — Kepulauan &amp; Daerah Rentan
+                    <div class="bg-[#f97316] text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
+                        Prioritas II — Kerentanan Tinggi
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1">Diversifikasi Local Food &amp; Smart Logistics</h3>
-                            <p class="text-xs text-slate-500 mb-4">Kep. Babel, Kep. Riau, Maluku, Maluku Utara, Papua Pegunungan.</p>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Diversifikasi Pangan &amp; Mitigasi Penuaan</h3>
+                            <p class="text-xs text-slate-500 mb-4">DI Yogyakarta, Papua, Kepulauan Riau, Maluku, Maluku Utara, Sulut.</p>
                             
                             <ul class="space-y-2.5 text-xs text-slate-700">
                                 <li class="flex items-start gap-2">
@@ -118,22 +118,22 @@
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
-                                    <span>Asuransi pertanian berbasis indeks parameter iklim lokal.</span>
+                                    <span>Insentif khusus penarikan tenaga kerja muda sektor agraris di wilayah berasio penuaan tinggi.</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Card 3: Prioritas III -->
+                <!-- Card 3: Sentra Strategis Relatif Tangguh -->
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
-                    <div class="bg-emerald-600 text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
-                        Prioritas III — Sentra Potensial &amp; Stabil
+                    <div class="bg-[#3b82f6] text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
+                        Sentra Strategis — Relatif Tangguh
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                         <div>
                             <h3 class="font-bold text-slate-900 text-base mb-1">Korporatisasi Petani &amp; Export Off-taker</h3>
-                            <p class="text-xs text-slate-500 mb-4">Sulawesi Selatan, Lampung, Sumsel, NTB, Papua Selatan.</p>
+                            <p class="text-xs text-slate-500 mb-4">Sulawesi Selatan, Lampung, Sumsel, Sumut, Sumbar, Sulteng, Kalbar.</p>
                             
                             <ul class="space-y-2.5 text-xs text-slate-700">
                                 <li class="flex items-start gap-2">
@@ -147,6 +147,34 @@
                                 <li class="flex items-start gap-2">
                                     <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
                                     <span>Penguatan Early Warning System berbasis IoT untuk mendeteksi penurunan RTP secara real-time.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Pemantauan Berkala / Lainnya -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
+                    <div class="bg-[#94a3b8] text-white px-5 py-3 text-xs font-bold tracking-wide uppercase">
+                        Pemantauan Berkala / Lainnya
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Supervisi Data &amp; Pengawasan Rutin</h3>
+                            <p class="text-xs text-slate-500 mb-4">22 Provinsi Lainnya (Kaltim, Riau, Jambi, Bengkulu, Bali, Kalsel, dll).</p>
+                            
+                            <ul class="space-y-2.5 text-xs text-slate-700">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Audit berkala data demografi petani dan fluktuasi produksi tahunan.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Fasilitas pendukung penyuluhan pertanian digital tingkat kabupaten.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                    <span>Evaluasi kesiapan cadangan pangan daerah secara periodik.</span>
                                 </li>
                             </ul>
                         </div>
@@ -171,9 +199,9 @@
 
         const programData = [
             {
-                prioritas: "Prioritas I — Sentra Kritis (Pulau Jawa)",
+                prioritas: "Prioritas I — Kerentanan & Kontribusi Tinggi",
                 program: "Proteksi Lahan & Subsidized Agropreneur",
-                wilayah: "Jawa Barat, Jawa Tengah, Jawa Timur, Banten, DI Yogyakarta",
+                wilayah: "Jawa Tengah, Jawa Timur, Jawa Barat, Aceh, Banten, NTB, NTT",
                 intervensi: [
                     "Moratorium penuh alih fungsi lahan LP2B dan insentif pajak PBB gratis untuk lahan produktif.",
                     "Skema pembiayaan digital (KUR Agropreneur) tanpa agunan bagi milenial yang mempertahankan lahan.",
@@ -181,23 +209,33 @@
                 ]
             },
             {
-                prioritas: "Prioritas II — Kepulauan & Daerah Rentan",
-                program: "Diversifikasi Local Food & Smart Logistics",
-                wilayah: "Kep. Babel, Kep. Riau, Maluku, Maluku Utara, Papua Pegunungan",
+                prioritas: "Prioritas II — Kerentanan Tinggi",
+                program: "Diversifikasi Pangan & Mitigasi Penuaan",
+                wilayah: "DI Yogyakarta, Papua, Kepulauan Riau, Maluku, Papua Barat, Sulut",
                 intervensi: [
                     "Optimalisasi pangan lokal non-beras (Sagu, Ubi Kayu, dan Jagung).",
                     "Pengembangan urban farming, hydroponics, dan jaringan cold-chain logistics terintegrasi.",
-                    "Asuransi pertanian berbasis indeks parameter iklim lokal."
+                    "Insentif khusus penarikan tenaga kerja muda sektor agraris di wilayah berasio penuaan tinggi."
                 ]
             },
             {
-                prioritas: "Prioritas III — Sentra Potensial & Stabil",
+                prioritas: "Sentra Strategis — Relatif Tangguh",
                 program: "Korporatisasi Petani & Export Off-taker",
-                wilayah: "Sulawesi Selatan, Lampung, Sumsel, NTB, Papua Selatan",
+                wilayah: "Sulawesi Selatan, Lampung, Sumsel, Sumut, Sumbar, Sulteng, Kalbar",
                 intervensi: [
                     "Pembentukan konsorsium bisnis korporasi petani berbasis koperasi modern.",
                     "Akselerasi keterbukaan pasar ekspor dan jaringan off-taker nasional.",
                     "Penguatan Early Warning System berbasis IoT untuk mendeteksi penurunan RTP secara real-time."
+                ]
+            },
+            {
+                prioritas: "Pemantauan Berkala / Lainnya",
+                program: "Supervisi Data & Pengawasan Rutin",
+                wilayah: "22 Provinsi Lainnya (Kaltim, Riau, Jambi, Bengkulu, Bali, Kalsel, dll)",
+                intervensi: [
+                    "Audit berkala data demografi petani dan fluktuasi produksi tahunan.",
+                    "Fasilitas pendukung penyuluhan pertanian digital tingkat kabupaten.",
+                    "Evaluasi kesiapan cadangan pangan daerah secara periodik."
                 ]
             }
         ];
