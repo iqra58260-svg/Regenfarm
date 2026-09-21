@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisis RTP Petani - RegenFarm Pro</title>
+    <title>RegenFarm</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +14,7 @@
     <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0">
         <div>
             <div class="p-5 flex items-center space-x-3 border-b border-slate-800">
-                <!-- Container Logo Membulat (Tidak Lancip) -->
+                <!-- Container Logo Membulat -->
                 <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center p-1.5 overflow-hidden shrink-0 border border-slate-700/60 shadow-sm">
                     <img src="logo.jpeg" alt="Logo" class="w-full h-full object-contain rounded-lg">
                 </div>
@@ -68,50 +68,65 @@
 
         <!-- Content Body -->
         <div class="p-8 space-y-6">
-            <!-- Chart Section (Container Tetap Diam/Stabil) -->
+            <!-- Chart Section -->
             <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-2">
                         <i class="fa-solid fa-chart-column text-emerald-600"></i>
                         <h3 class="font-bold text-slate-800">Perbandingan Rasio Tekanan Regenerasi Petani (RTP) - 32 Provinsi</h3>
                     </div>
-                    <span class="text-xs bg-red-100 text-red-700 px-2.5 py-1 rounded-full font-bold">Tertinggi: DI Yogyakarta (16.39)</span>
+                    <span class="text-xs bg-red-100 text-red-700 px-2.5 py-1 rounded-full font-bold">RTP Tertinggi: DI Yogyakarta (16.39)</span>
                 </div>
-                <p class="text-xs text-slate-500 mb-6">Mengukur perbandingan perimbangan kelompok petani senior (&gt;54 thn) vs petani muda (≤34 thn) pada 32 provinsi teranalisis. Nilai RTP yang semakin tinggi mengindikasikan tekanan regenerasi yang semakin kritis.</p>
+                <p class="text-xs text-slate-500 mb-6">Mengukur perbandingan perimbangan kelompok petani senior (&gt;54 thn) vs petani muda (≤34 thn) pada 32 provinsi teranalisis. Warna grafik disesuaikan dengan tingkat prioritas wilayah.</p>
                 
                 <div class="h-80 w-full">
                     <canvas id="rtpChart"></canvas>
                 </div>
             </div>
 
-            <!-- Bottom Cards (Tetap Memiliki Efek Timbul & Bayangan Smooth Saat Hover) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-5 rounded-xl border-l-4 border-red-500 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
+            <!-- Bottom Cards (Kategori Warna: Merah, Kuning, Biru, Abu-abu) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                <!-- Kartu 1: Merah (Prioritas I / Waspada Ekstrem) -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-red-500 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-red-500/10 cursor-pointer">
                     <div class="flex items-center gap-2 text-red-600 font-bold text-sm mb-2">
-                        <i class="fa-solid fa-triangle-exclamation"></i> Tekanan RTP Ekstrem (RTP &gt; 5.0)
+                        <i class="fa-solid fa-triangle-exclamation"></i> Prioritas I (RTP &ge; 5.0)
                     </div>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        <strong>DI Yogyakarta (16.39) &amp; Jawa Tengah (8.00)</strong> mencatatkan rasio ketimpangan penuaan petani tertinggi. Dominasi petani senior memerlukan program modernisasi alsintan presisi dan insentif regenerasi secara instan.
+                        <strong>DI Yogyakarta, Jawa Tengah, Jawa Barat, Jawa Timur, Bali, Banten, &amp; NTB</strong> mengalami ketimpangan penuaan petani yang sangat kritis. Diperlukan intervensi teknologi &amp; modernisasi instan.
                     </p>
                 </div>
                 
-                <div class="bg-white p-5 rounded-xl border-l-4 border-amber-500 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
+                <!-- Kartu 2: Kuning (Prioritas II / Waspada Tinggi) -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-amber-500 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-amber-500/10 cursor-pointer">
                     <div class="flex items-center gap-2 text-amber-600 font-bold text-sm mb-2">
-                        <i class="fa-solid fa-scale-balanced"></i> Waspada Sentra Nasional (RTP 3.0 - 5.5)
+                        <i class="fa-solid fa-triangle-exclamation"></i> Prioritas II (RTP 3.5 - 4.99)
                     </div>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Sentra pangan utama seperti <strong>Jawa Barat (5.58), Jawa Timur (5.57), dan Bali (5.20)</strong> berada dalam zona rawan penuaan demografi. Tanpa intervensi, kapasitas produksi beras nasional terancam terdegradasi.
+                        Wilayah seperti <strong>Sulawesi Utara &amp; Sumatera Barat</strong> berada di zona rawan. Tekanan regenerasi mulai berdampak pada produktivitas jika tidak segera ditangani secara terstruktur.
                     </p>
                 </div>
 
-                <div class="bg-white p-5 rounded-xl border-l-4 border-emerald-500 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-300/60 hover:border-slate-300/80 cursor-pointer">
-                    <div class="flex items-center gap-2 text-emerald-600 font-bold text-sm mb-2">
-                        <i class="fa-solid fa-seedling"></i> Rasio Relatif Seimbang (RTP &lt; 2.0)
+                <!-- Kartu 3: Biru (Pemantauan Berkala / Sentra Strategis) -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-blue-500 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/10 cursor-pointer">
+                    <div class="flex items-center gap-2 text-blue-600 font-bold text-sm mb-2">
+                        <i class="fa-solid fa-shield-halved"></i> Pemantauan / Sentra (RTP 2.0 - 3.49)
                     </div>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Wilayah seperti <strong>Nusa Tenggara Barat (1.80), Papua (1.55), dan Papua Barat (1.49)</strong> menunjukkan proporsi keterlibatan pemuda tani yang relatif lebih memadai untuk menjaga keberlanjutan sektor.
+                        Sentra pangan seperti <strong>Sulawesi Selatan, Sumatera Utara, Lampung, &amp; Sumsel</strong> memiliki regenerasi sedang. Fokus pada penguatan kelembagaan petani muda &amp; akses permodalan.
                     </p>
                 </div>
+
+                <!-- Kartu 4: Abu-abu (Relatif Seimbang / Eksklusi) -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-slate-400 border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-400/10 cursor-pointer">
+                    <div class="flex items-center gap-2 text-slate-600 font-bold text-sm mb-2">
+                        <i class="fa-solid fa-seedling"></i> Relatif Seimbang (RTP &lt; 2.0)
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Wilayah Papua &amp; Papua Barat menunjukkan proporsi petani muda yang relatif lebih seimbang. Fokus pada peningkatan kapasitas operasional &amp; rantai pasok lokal.
+                    </p>
+                </div>
+
             </div>
         </div>
     </main>
@@ -186,28 +201,28 @@
                     datasets: [{
                         label: 'Skor Rasio RTP',
                         data: sortedData.map(d => d.rtp),
+                        // Pengaturan Warna Disesuaikan dengan Prioritas
                         backgroundColor: sortedData.map(d => {
-                            if (d.rtp >= 5.0) return '#ef4444';                    // Merah (Termasuk DI Yogyakarta - 16.39)
-                            if (d.rtp >= 3.0) return '#f97316';                    // Oranye (Waspada Tinggi)
-                            if (d.rtp >= 2.0) return '#eab308';                    // Kuning (Sedang)
-                            return '#10b981';                                      // Hijau (Relatif Seimbang)
+                            if (d.rtp >= 5.0) return '#ef4444';      // Merah (Prioritas I)
+                            if (d.rtp >= 3.5) return '#f59e0b';      // Kuning/Amber (Prioritas II)
+                            if (d.rtp >= 2.0) return '#3b82f6';      // Biru (Pemantauan Berkala / Sentra)
+                            return '#64748b';                        // Abu-abu (Seimbang / Eksklusi)
                         }),
                         hoverBackgroundColor: sortedData.map(d => {
-                            if (d.rtp >= 5.0) return '#b91c1c';                    // Merah Gelap saat Hover
-                            if (d.rtp >= 3.0) return '#c2410c';
-                            if (d.rtp >= 2.0) return '#a16207';
-                            return '#047857';
+                            if (d.rtp >= 5.0) return '#b91c1c';
+                            if (d.rtp >= 3.5) return '#d97706';
+                            if (d.rtp >= 2.0) return '#1d4ed8';
+                            return '#334155';
                         }),
                         borderWidth: 0,
-                        hoverBorderWidth: 3,
-                        hoverBorderColor: '#0f172a', // Outline gelap agar timbul tegas
+                        hoverBorderWidth: 2,
+                        hoverBorderColor: '#0f172a',
                         borderRadius: 4
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    // Interaksi hanya terpicu jika kursor MENYENTUH BAR GRAFIK LANGSUNG
                     interaction: {
                         mode: 'nearest',
                         intersect: true
