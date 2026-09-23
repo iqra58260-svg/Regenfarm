@@ -276,14 +276,14 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Data 38 Provinsi Disesuaikan Kategori Sesuai Esai Resmi
+        // Data 38 Provinsi Termasuk DKI Jakarta & Sulbar dalam Kategori Eksklusi / Audit Data
         const provincesData = [
             { name: "DI Yogyakarta", island: "Jawa", rtp: 16.39, senior: "240,339", young: "14,660", avgAge: "55.8 Thn", ikrp: 0.51, contrib: "1.00%", commodity: "Tanaman Pangan", category: "Prioritas II" },
             { name: "Jawa Tengah", island: "Jawa", rtp: 8.00, senior: "2,091,634", young: "261,352", avgAge: "51.1 Thn", ikrp: 0.38, contrib: "16.99%", commodity: "Tanaman Pangan", category: "Prioritas I" },
             { name: "Jawa Barat", island: "Jawa", rtp: 5.58, senior: "1,508,044", young: "270,276", avgAge: "51.5 Thn", ikrp: 0.31, contrib: "17.09%", commodity: "Tanaman Pangan", category: "Prioritas I" },
             { name: "Jawa Timur", island: "Jawa", rtp: 5.57, senior: "2,568,515", young: "460,769", avgAge: "50.5 Thn", ikrp: 0.35, contrib: "18.16%", commodity: "Tanaman Pangan", category: "Prioritas I" },
             { name: "Bali", island: "Bali & Nusa Tenggara", rtp: 5.20, senior: "152,777", young: "29,386", avgAge: "44.8 Thn", ikrp: 0.30, contrib: "1.26%", commodity: "Tanaman Pangan", category: "Prioritas I" },
-            { name: "DKI Jakarta", island: "Jawa", rtp: 5.08, senior: "5,381", young: "1,059", avgAge: "58.2 Thn", ikrp: 0.25, contrib: "0.00%", commodity: "Tanaman Pangan", category: "Eksklusi / Audit Data" },
+            { name: "DKI Jakarta", island: "Jawa", rtp: 5.08, senior: "5,381", young: "1,059", avgAge: "58.2 Thn", ikrp: 0.25, contrib: "0.00%", commodity: "Tanaman Pangan", category: "Eksklusi / Pemekaran" },
             { name: "Banten", island: "Jawa", rtp: 5.01, senior: "248,532", young: "49,586", avgAge: "50.8 Thn", ikrp: 0.28, contrib: "3.15%", commodity: "Tanaman Pangan", category: "Prioritas I" },
             { name: "Sulawesi Utara", island: "Sulawesi", rtp: 4.79, senior: "111,721", young: "23,331", avgAge: "45.9 Thn", ikrp: 0.27, contrib: "0.45%", commodity: "Perkebunan", category: "Pemantauan Berkala" },
             { name: "Sumatera Barat", island: "Sumatera", rtp: 4.38, senior: "291,612", young: "66,538", avgAge: "46.5 Thn", ikrp: 0.29, contrib: "2.77%", commodity: "Tanaman Pangan & Perkebunan", category: "Pemantauan Berkala" },
@@ -293,7 +293,7 @@
             { name: "Sumatera Utara", island: "Sumatera", rtp: 3.10, senior: "540,385", young: "174,102", avgAge: "51.8 Thn", ikrp: 0.26, contrib: "3.90%", commodity: "Perkebunan", category: "Pemantauan Berkala" },
             { name: "Kalimantan Selatan", island: "Kalimantan", rtp: 3.02, senior: "158,902", young: "52,564", avgAge: "45.6 Thn", ikrp: 0.28, contrib: "1.64%", commodity: "Tanaman Pangan", category: "Prioritas I" },
             { name: "Lampung", island: "Sumatera", rtp: 3.01, senior: "469,881", young: "156,130", avgAge: "46.2 Thn", ikrp: 0.19, contrib: "5.16%", commodity: "Perkebunan & Tanaman Pangan", category: "Sentra Strategis" },
-            { name: "Nusa Tenggara Timur", island: "Bali & Nusa Tenggara", rtp: 3.00, senior: "327,628", young: "109,067", avgAge: "48.2 Thn", ikrp: 0.33, contrib: "1.43%", commodity: "Tanaman Pangan", category: "Prioritas I" },
+            { name: "Nusa Tenggara Timur", island: "Bali & Nusa Tenggara", rtp: 3.00, senior: "327,628", young: "109,067", avgAge: "48.2 Thn", ikrp: 0.33, contrib: "1.43%", commodity: "Tanaman Pangan & Peternakan", category: "Prioritas I" },
             { name: "Sulawesi Tenggara", island: "Sulawesi", rtp: 2.76, senior: "107,360", young: "38,890", avgAge: "47.6 Thn", ikrp: 0.25, contrib: "0.90%", commodity: "Perkebunan", category: "Pemantauan Berkala" },
             { name: "Aceh", island: "Sumatera", rtp: 2.65, senior: "262,894", young: "99,346", avgAge: "52.8 Thn", ikrp: 0.32, contrib: "2.63%", commodity: "Tanaman Pangan & Perkebunan", category: "Prioritas I" },
             { name: "Riau", island: "Sumatera", rtp: 2.60, senior: "222,057", young: "85,566", avgAge: "49.0 Thn", ikrp: 0.23, contrib: "0.39%", commodity: "Perkebunan", category: "Pemantauan Berkala" },
@@ -302,7 +302,7 @@
             { name: "Sulawesi Tengah", island: "Sulawesi", rtp: 2.43, senior: "136,493", young: "56,203", avgAge: "45.4 Thn", ikrp: 0.24, contrib: "1.54%", commodity: "Perkebunan", category: "Pemantauan Berkala" },
             { name: "Jambi", island: "Sumatera", rtp: 2.36, senior: "166,923", young: "70,857", avgAge: "47.9 Thn", ikrp: 0.22, contrib: "0.52%", commodity: "Perkebunan", category: "Pemantauan Berkala" },
             { name: "Kalimantan Tengah", island: "Kalimantan", rtp: 2.33, senior: "92,285", young: "39,670", avgAge: "46.8 Thn", ikrp: 0.21, contrib: "0.62%", commodity: "Perkebunan", category: "Pemantauan Berkala" },
-            { name: "Sulawesi Barat", island: "Sulawesi", rtp: 2.26, senior: "59,384", young: "26,325", avgAge: "49.9 Thn", ikrp: 0.23, contrib: "0.00%", commodity: "Perkebunan", category: "Eksklusi / Audit Data" },
+            { name: "Sulawesi Barat", island: "Sulawesi", rtp: 2.26, senior: "59,384", young: "26,325", avgAge: "49.9 Thn", ikrp: 0.23, contrib: "0.00%", commodity: "Perkebunan", category: "Eksklusi / Pemekaran" },
             { name: "Kalimantan Utara", island: "Kalimantan", rtp: 2.25, senior: "17,463", young: "7,750", avgAge: "48.5 Thn", ikrp: 0.20, contrib: "0.04%", commodity: "Perkebunan", category: "Pemantauan Berkala" },
             { name: "Bengkulu", island: "Sumatera", rtp: 2.22, senior: "98,551", young: "44,306", avgAge: "47.0 Thn", ikrp: 0.21, contrib: "0.54%", commodity: "Perkebunan", category: "Pemantauan Berkala" },
             { name: "Kalimantan Barat", island: "Kalimantan", rtp: 2.20, senior: "210,673", young: "95,686", avgAge: "47.3 Thn", ikrp: 0.22, contrib: "1.31%", commodity: "Perkebunan & Tanaman Pangan", category: "Pemantauan Berkala" },
