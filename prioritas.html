@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegenFarm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0">
+        <div>
+            <div class="p-5 flex items-center space-x-3 border-b border-slate-800">
+                <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center p-1.5 overflow-hidden shrink-0 border border-slate-700/60 shadow-sm">
+                    <img src="logo.jpeg" alt="Logo" class="w-full h-full object-contain rounded-lg">
+                </div>
+                <div>
+                    <h1 class="text-white font-bold text-lg flex items-center gap-2">RegenFarm <span class="bg-emerald-500 text-slate-900 text-xs px-1.5 py-0.5 rounded">PRO</span></h1>
+                    <p class="text-xs text-slate-400">v3.0 - Full Enterprise</p>
+                </div>
+            </div>
+            <div class="p-3 text-xs text-slate-500">Sistem Pendukung Keputusan Ketahanan Pangan &amp; Regenerasi Petani</div>
+            
+            <nav class="mt-2 space-y-1 px-3">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition duration-200">
+                    <i class="fa-solid fa-house"></i> Overview &amp; Data
+                </a>
+                <a href="rtp.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition duration-200">
+                    <i class="fa-solid fa-users"></i> Analisis RTP Petani
+                </a>
+                <a href="prioritas.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-emerald-950 text-emerald-400 font-medium border border-emerald-800/50 shadow-sm">
+                    <i class="fa-solid fa-chart-pie"></i> Matriks Prioritas
+                </a>
+                <a href="interverensi.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition duration-200">
+                    <i class="fa-solid fa-hand-holding-heart"></i> Program Intervensi
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-slate-800 text-xs flex items-center gap-2 text-slate-400">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span> Basis Data 32 Provinsi Lolos Saring (Populasi C)
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-y-auto">
+        <!-- Top Header -->
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center shrink-0">
+            <div>
+                <h2 class="text-xl font-bold text-slate-800">Matriks Pemetaan Prioritas RegenFarm (n=32)</h2>
+                <p class="text-xs text-slate-500">Pemetaan Kuadran Berdasarkan Kontribusi Produksi &amp; IKRP Model 1 (Dokumen Resmi SEC)</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="exportData('csv')" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50 hover:border-slate-400 transition duration-200 active:scale-95">
+                    <i class="fa-solid fa-file-arrow-down"></i> Ekspor CSV
+                </button>
+                <button onclick="exportData('json')" class="border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 hover:bg-slate-50 hover:border-slate-400 transition duration-200 active:scale-95">
+                    <i class="fa-solid fa-code"></i> Ekspor JSON
+                </button>
+                <div class="bg-slate-100 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-600 border border-slate-200/60 shadow-inner">
+                    <i class="fa-regular fa-clock"></i> <span id="live-clock">--:--:--</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <div class="p-8 space-y-6">
+            <!-- Chart Container -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+                    <div>
+                        <h3 class="font-bold text-slate-800">Gambar 2. Matriks Prioritas RegenFarm (n=32)</h3>
+                        <p class="text-xs text-slate-500">Sumbu X: Kontribusi Produksi terhadap Total Nasional 2023, % (denominator Populasi C) | Sumbu Y: IKRP (Model 1: min-max, bobot sama rata)</p>
+                    </div>
+                </div>
+
+                <!-- Legend dengan Warna Tajam dan Pekat -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-6 bg-slate-50/80 p-3.5 rounded-lg border border-slate-100">
+                    <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-[#ef4444] inline-block shrink-0 shadow-sm"></span> <strong>Prioritas I</strong></div>
+                    <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-[#f97316] inline-block shrink-0 shadow-sm"></span> <strong>Prioritas II</strong></div>
+                    <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-[#3b82f6] inline-block shrink-0 shadow-sm"></span> <strong>Sentra Strategis Relatif Tangguh</strong></div>
+                    <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-[#94a3b8] inline-block shrink-0 shadow-sm"></span> <strong>Pemantauan Berkala</strong></div>
+                </div>
+
+                <!-- Scatter/Bubble Chart Canvas -->
+                <div class="h-[500px] w-full relative">
+                    <canvas id="matrixChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Quadrant Summary Cards (Lengkap Efek Transition, Transform, & Hover) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- Prioritas I -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-[#ef4444] border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-lg hover:border-slate-300 cursor-pointer">
+                    <h4 class="text-xs font-bold text-[#ef4444] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Prioritas I
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Jawa Tengah, Jawa Timur, Jawa Barat, Banten, Aceh, Nusa Tenggara Barat, Nusa Tenggara Timur, Kalsel, dan Bali.
+                    </p>
+                </div>
+
+                <!-- Prioritas II -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-[#f97316] border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-lg hover:border-slate-300 cursor-pointer">
+                    <h4 class="text-xs font-bold text-[#f97316] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-exclamation"></i> Prioritas II
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        DI Yogyakarta, Papua, Kepulauan Riau, Maluku, Papua Barat, dan Maluku Utara.
+                    </p>
+                </div>
+
+                <!-- Sentra Strategis Tangguh -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-[#3b82f6] border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-lg hover:border-slate-300 cursor-pointer">
+                    <h4 class="text-xs font-bold text-[#3b82f6] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-shield-halved"></i> Sentra Strategis Relatif Tangguh
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Sulawesi Selatan, Lampung, Sumatera Selatan, Sumatera Utara, Sumatera Barat, Sulawesi Tengah, dan Kalimantan Barat.
+                    </p>
+                </div>
+
+                <!-- Pemantauan Berkala -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-[#94a3b8] border-slate-200 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-lg hover:border-slate-300 cursor-pointer">
+                    <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-eye"></i> Pemantauan Berkala
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Kaltim, Riau, Jambi, Bengkulu, Gorontalo, Kalteng, Sultra, Bangka Belitung, Kalimantan Utara, dll.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Info Catatan 6 Provinsi Eksklusi -->
+            <div class="bg-slate-100 p-3.5 rounded-xl border border-slate-200 text-xs text-slate-500 flex items-center justify-between shadow-inner">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-slate-400 text-sm"></i>
+                    <span><strong>Catatan Total 38 Provinsi:</strong> 32 Provinsi di atas dianalisis pada matriks utama (n=32). <strong>6 Provinsi Lainnya</strong> (DKI Jakarta, Sulbar, Papua Tengah, Papua Pegunungan, Papua Selatan, Papua Barat Daya) tergolong Kategori Eksklusi / Audit Data Pemekaran.</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Warna Tajam Pekat: Merah (#ef4444), Oranye (#f97316), Biru (#3b82f6), Abu-abu (#94a3b8)
+        const COLOR_P1 = "#ef4444";
+        const BORDER_P1 = "#b91c1c";
+
+        const COLOR_P2 = "#f97316";
+        const BORDER_P2 = "#c2410c";
+
+        const COLOR_SENTRA = "#3b82f6";
+        const BORDER_SENTRA = "#1d4ed8";
+
+        const COLOR_BERKALA = "#94a3b8";
+        const BORDER_BERKALA = "#475569";
+
+        // Data 32 Provinsi Lolos Saring (n=32) Disesuaikan Persis Sesuai Posisi & Ukuran Gambar 2
+        const dataProvinsi = [
+            // PRIORITAS I (Merah Cerah)
+            { provinsi: "Jawa Timur", x: 18.16, y: 0.35, r: 24, bg: COLOR_P1, border: BORDER_P1, status: "Prioritas I" },
+            { provinsi: "Jawa Barat", x: 17.09, y: 0.31, r: 23, bg: COLOR_P1, border: BORDER_P1, status: "Prioritas I" },
+            { provinsi: "Jawa Tengah", x: 16.99, y: 0.38, r: 23, bg: COLOR_P1, border: BORDER_P1, status: "Prioritas I" },
+            { provinsi: "Banten", x: 3.15, y: 0.28, r: 12, bg: COLOR_P1, border: BORDER_P1, status: "Prioritas I" },
+            { provinsi: "Aceh", x: 2.63, y: 0.32, r: 11, bg: COLOR_P1, border: BORDER_P1, status: "Prioritas I" },
+            { provinsi: "Nusa Tenggara Barat", x: 2.88, y: 0.25, r: 10, bg: COLOR_P1, border: BORDER_P1, status: "Prioritas I" },
+            { provinsi: "Nusa Tenggara Timur", x: 1.43, y: 0.33, r: 9, bg: COLOR_P1, border: BORDER_P1, status: "Prioritas I" },
+            { provinsi: "Kalsel", x: 1.64, y: 0.28, r: 9, bg: COLOR_P1, border: BORDER_P1, status: "Prioritas I" },
+            { provinsi: "Bali", x: 1.26, y: 0.27, r: 8, bg: COLOR_P1, border: BORDER_P1, status: "Prioritas I" },
+
+            // PRIORITAS II (Oranye Cerah)
+            { provinsi: "Papua", x: 0.01, y: 0.76, r: 6, bg: COLOR_P2, border: BORDER_P2, status: "Prioritas II" },
+            { provinsi: "Kepulauan Riau", x: 0.01, y: 0.55, r: 6, bg: COLOR_P2, border: BORDER_P2, status: "Prioritas II" },
+            { provinsi: "DI Yogyakarta", x: 1.00, y: 0.51, r: 9, bg: COLOR_P2, border: BORDER_P2, status: "Prioritas II" },
+            { provinsi: "Maluku", x: 0.15, y: 0.40, r: 6, bg: COLOR_P2, border: BORDER_P2, status: "Prioritas II" },
+            { provinsi: "Papua Barat", x: 0.04, y: 0.37, r: 5, bg: COLOR_P2, border: BORDER_P2, status: "Prioritas II" },
+            { provinsi: "Maluku Utara", x: 0.05, y: 0.23, r: 5, bg: COLOR_P2, border: BORDER_P2, status: "Prioritas II" },
+
+            // SENTRA STRATEGIS RELATIF TANGGUH (Biru Cerah)
+            { provinsi: "Sulawesi Selatan", x: 9.12, y: 0.21, r: 18, bg: COLOR_SENTRA, border: BORDER_SENTRA, status: "Sentra Strategis Relatif Tangguh" },
+            { provinsi: "Lampung", x: 5.16, y: 0.19, r: 15, bg: COLOR_SENTRA, border: BORDER_SENTRA, status: "Sentra Strategis Relatif Tangguh" },
+            { provinsi: "Sumatera Selatan", x: 5.30, y: 0.11, r: 15, bg: COLOR_SENTRA, border: BORDER_SENTRA, status: "Sentra Strategis Relatif Tangguh" },
+            { provinsi: "Sumatera Utara", x: 3.90, y: 0.19, r: 13, bg: COLOR_SENTRA, border: BORDER_SENTRA, status: "Sentra Strategis Relatif Tangguh" },
+            { provinsi: "Sumatera Barat", x: 2.77, y: 0.22, r: 11, bg: COLOR_SENTRA, border: BORDER_SENTRA, status: "Sentra Strategis Relatif Tangguh" },
+            { provinsi: "Sulawesi Tengah", x: 1.54, y: 0.17, r: 9, bg: COLOR_SENTRA, border: BORDER_SENTRA, status: "Sentra Strategis Relatif Tangguh" },
+            { provinsi: "Kalimantan Barat", x: 1.31, y: 0.15, r: 8, bg: COLOR_SENTRA, border: BORDER_SENTRA, status: "Sentra Strategis Relatif Tangguh" },
+
+            // PEMANTAUAN BERKALA (Abu-abu Kontras)
+            { provinsi: "Kalimantan Timur", x: 0.40, y: 0.18, r: 5, bg: COLOR_BERKALA, border: BORDER_BERKALA, status: "Pemantauan Berkala" },
+            { provinsi: "Riau", x: 0.39, y: 0.13, r: 5, bg: COLOR_BERKALA, border: BORDER_BERKALA, status: "Pemantauan Berkala" },
+            { provinsi: "Jambi", x: 0.52, y: 0.15, r: 5, bg: COLOR_BERKALA, border: BORDER_BERKALA, status: "Pemantauan Berkala" },
+            { provinsi: "Bengkulu", x: 0.54, y: 0.13, r: 5, bg: COLOR_BERKALA, border: BORDER_BERKALA, status: "Pemantauan Berkala" },
+            { provinsi: "Gorontalo", x: 0.47, y: 0.22, r: 5, bg: COLOR_BERKALA, border: BORDER_BERKALA, status: "Pemantauan Berkala" },
+            { provinsi: "Kalimantan Tengah", x: 0.62, y: 0.18, r: 5, bg: COLOR_BERKALA, border: BORDER_BERKALA, status: "Pemantauan Berkala" },
+            { provinsi: "Sulawesi Tenggara", x: 0.90, y: 0.19, r: 5, bg: COLOR_BERKALA, border: BORDER_BERKALA, status: "Pemantauan Berkala" },
+            { provinsi: "Bangka Belitung", x: 0.12, y: 0.08, r: 5, bg: COLOR_BERKALA, border: BORDER_BERKALA, status: "Pemantauan Berkala" },
+            { provinsi: "Kalimantan Utara", x: 0.04, y: 0.22, r: 5, bg: COLOR_BERKALA, border: BORDER_BERKALA, status: "Pemantauan Berkala" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLiveClock();
+            setInterval(updateLiveClock, 1000);
+            initMatrixChart();
+        });
+
+        function updateLiveClock() {
+            const clockEl = document.getElementById('live-clock');
+            if (clockEl) {
+                const now = new Date();
+                clockEl.innerText = now.toLocaleTimeString('id-ID');
+            }
+        }
+
+        function initMatrixChart() {
+            const canvas = document.getElementById('matrixChart');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+
+            new Chart(ctx, {
+                type: 'bubble',
+                data: {
+                    datasets: [{
+                        label: 'Provinsi',
+                        data: dataProvinsi,
+                        backgroundColor: dataProvinsi.map(d => d.bg),
+                        borderColor: dataProvinsi.map(d => d.border),
+                        borderWidth: 2,
+                        hoverBorderColor: '#0f172a',
+                        hoverBorderWidth: 3,
+                        hoverRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1200,
+                        easing: 'easeOutQuart'
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                            titleFont: { size: 13, weight: 'bold' },
+                            bodyFont: { size: 11 },
+                            padding: 10,
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    const raw = context.raw;
+                                    return [
+                                        `Provinsi: ${raw.provinsi}`,
+                                        `Kategori: ${raw.status}`,
+                                        `Kontribusi Produksi: ${raw.x}%`,
+                                        `IKRP: ${raw.y}`
+                                    ];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { 
+                                display: true, 
+                                text: 'Kontribusi Produksi terhadap Total Nasional 2023, % (denominator Populasi C)', 
+                                font: { size: 11, weight: 'bold' } 
+                            },
+                            min: -0.5,
+                            max: 19.5,
+                            ticks: { stepSize: 2.5 },
+                            grid: { color: '#e2e8f0' }
+                        },
+                        y: {
+                            title: { 
+                                display: true, 
+                                text: 'IKRP (Model 1: min-max, bobot sama rata)', 
+                                font: { size: 11, weight: 'bold' } 
+                            },
+                            min: 0.05,
+                            max: 0.78,
+                            ticks: { stepSize: 0.1 },
+                            grid: { color: '#e2e8f0' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function exportData(format) {
+            if (format === 'json') {
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataProvinsi, null, 2));
+                const downloadAnchor = document.createElement('a');
+                downloadAnchor.setAttribute("href", dataStr);
+                downloadAnchor.setAttribute("download", "RegenFarm_Gambar2_Matriks.json");
+                document.body.appendChild(downloadAnchor);
+                downloadAnchor.click();
+                downloadAnchor.remove();
+            } else if (format === 'csv') {
+                let csvContent = "\uFEFFProvinsi,Kontribusi_Persen,IKRP,Kategori\n";
+                dataProvinsi.forEach(d => {
+                    csvContent += `"${d.provinsi}",${d.x},${d.y},"${d.status}"\n`;
+                });
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.setAttribute("href", url);
+                link.setAttribute("download", "RegenFarm_Gambar2_Matriks.csv");
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            }
+        }
+    </script>
+</body>
+</html>
